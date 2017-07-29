@@ -20,7 +20,10 @@
   },
   "homepage": "https://github.com/rexscanner/notification#readme",
   "dependencies": {
+    "bluebird": "^3.5.0",
     "every-moment": "0.0.1",
-    "mongojs": "^2.4.0"
+    "mongojs": "^2.4.0",
+    "sendgrid": "^5.2.0",
+    "winston": "^2.3.1"
   }
 }
