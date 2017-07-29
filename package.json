@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "preinstall": "npm install pm2 -g",
-    "start": "pm2 start index.js -i max --attach",
+    "start": "pm2 start index.js --attach",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -26,7 +26,6 @@
     "isstream": "^0.1.2",
     "mongojs": "^2.4.0",
     "nodemailer": "^4.0.1",
-    "twilio": "^3.6.1",
     "winston": "^2.3.1"
   }
 }
