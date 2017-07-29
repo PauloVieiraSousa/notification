@@ -121,6 +121,7 @@ function runNotifications(results) {
         .then(result => updateNotifications(result.items))
 
 }
+notificationDb.findAsync({ processed: false }).then(_ => log('items', _))
 Every(1, 'second', function () {
     notificationDb.findAsync({ processed: false })
         .then(runNotifications)
