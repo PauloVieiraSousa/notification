@@ -1,30 +1,32 @@
-const { mail } = require('sendgrid');
 const Bluebird = require('bluebird')
+const nodemailer = require('nodemailer');
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true, // secure:true for port 465, secure:false for port 587
+    auth: {
+        user: process.env.MAIL_USER,
+        pass: process.env.MAIL_PASSWORD
+    }
+});
 
-const sg = require('sendgrid')('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');
-
-
-function send(request) {
-    return Bluebird.promisify(sg.API)(request)
-        .then(response => {
-            console.log(response.statusCode);
-            console.log(response.body);
-            console.log(response.headers);
-            return response
-        });
+function mailer(email, items) {
+    const html = items.map(i => `<b>URL:</b> ${i.pass.url} <br>
+                                  <b>PRICE</b>: R$ ${i.pass.price} 
+                                  <br><br>`).join()
+    const mailOptions = {
+        from: 'rexflightscanner@gmail.com', 
+        to: email, 
+        subject: 'Hello', 
+        text: 'Hello world ?', 
+        html: html
+    };
+    
+    return new Promise((resolve, reject) => {
+        transporter.sendMail
+            (mailOptions, (error, info) => error ? reject(error) : resolve(info));
+    })
 }
-function mailer({email, pass}) {
-    const fromEmail = new mail.Email('rexflightscanner@gmail.com');
-    const toEmail = new mail.Email(email);
-    const subject = 'Sending with SendGrid is Fun';
-    const content = new mail.Content('text/plain', 'and easy to do anywhere, even with Node.js');
-    const mailContent = new mail.Mail(fromEmail, subject, toEmail, content);
-    const request = sg.emptyRequest({
-        method: 'POST',
-        path: '/v3/mail/send',
-        body: mailContent.toJSON()
-    });
-    return send(request)
 
-}
 module.exports.send = mailer
