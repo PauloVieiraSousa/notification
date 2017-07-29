@@ -7,7 +7,7 @@ const winston = require('winston')
 const Bluebird = require('bluebird')
 const notificationDb = Bluebird.promisifyAll(db.collection('notifications'))
 const Mailer = require('./mailer')
-const Sms = require('./Sms')
+// const Sms = require('./Sms')
 const logger = new winston.Logger({
     level: 'info',
     transports: [
