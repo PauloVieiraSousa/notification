@@ -1,0 +1,24 @@
+{
+  "name": "notification",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rexscanner/notification.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rexscanner/notification/issues"
+  },
+  "homepage": "https://github.com/rexscanner/notification#readme",
+  "dependencies": {
+    "every-moment": "0.0.1",
+    "mongojs": "^2.4.0"
+  }
+}
