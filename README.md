@@ -1,10 +1,11 @@
-##Run
+## Run
 
     - Para rodar o projeto, você deve copiar o arquivo .env do google drive e adicionar ao projeto
     - Rotina para disparo de notificações do RexScanner
 ## Disparo da rotina
 dados: 
-    ``` {
+``` 
+{
                 user: {
                     name: 'Erick Wendel',
                     fbUser: 'erickwendel',
@@ -33,4 +34,4 @@ dados:
                     }
                 ]
 
-            ```
+```
