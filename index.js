@@ -17,8 +17,8 @@ const logger = new winston.Logger({
 })
 const stringify = (item) => typeof (item) == 'object' ? JSON.stringify(item) : item
 const templateLog = (msg, params) => `${stringify(msg) || ''} ${params ? ',' : ''}${stringify(params) || ''}`
-global.log = (msg, params) => logger.log('info', templateLog(msg, params))
-global.error = (msg, params) => logger.log('error', msg, `${params ? ',' : ''}${params || ''}`)
+global.log = (msg, params) => logger.log('info-notification', templateLog(msg, params))
+global.error = (msg, params) => logger.log('error-notification', msg, `${params ? ',' : ''}${params || ''}`)
 
 db.on('connect', () => log('database connected'))
 db.on('error', (err) => error('database error', err))
