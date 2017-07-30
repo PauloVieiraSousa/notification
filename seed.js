@@ -16,7 +16,7 @@ notificationDb
         user: {
             name: 'Erick Wendel',
             fbUser: 'erickwendel',
-            email: 'rexflightscanner@gmail.com',
+            email: 'igor@devstacks.com.br',
             phone: '5511969803385'
 
         },
@@ -79,7 +79,7 @@ notificationDb
                     }]
                 }
             }],
-            "fare": { 
+            "fare": {
                 "total_price": "880.46",
                 "price_per_adult": {
                     "total_fare": "880.46",
@@ -99,4 +99,3 @@ notificationDb
     .then(console.log)
     .then(_ => process.exit())
     .catch(console.error)
-

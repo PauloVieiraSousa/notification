@@ -1,0 +1,13 @@
+html
+  head
+  body
+    center(style="margin-bottom: 30px; float: left;")
+      img(src=header, width="100%")
+      img(src=sidebar, width="100%")
+    center(style="margin-top: 50px; width: 100%; margin: 0 auto; float: left;")
+      each ticket in tickers
+        div(
+          style="margin: 0; padding: 0; box-sizing: border-box; width: 50%; float: left; padding: 10px; border: 1px solid #ccc")
+          h2(style="margin: 0; padding: 0; box-sizing: border-box; font-size: 30px; color: #089a9b;")= ticket.destiny
+          span(style="font-size: 25px; color: tomato; font-weight: 700;")= ticket.price
+          p(class="desc")= ticket.boarding
