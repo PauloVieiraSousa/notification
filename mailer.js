@@ -14,16 +14,17 @@ const transporter = nodemailer.createTransport({
 function mailer(email, items) {
     const html = items.map(i => `<b>Ois<b>`).join()
     const mailOptions = {
-        from: 'rexflightscanner@gmail.com', 
-        to: email, 
-        subject: 'Hello', 
-        text: 'Hello world ?', 
+        from: 'rexflightscanner@gmail.com',
+        to: email,
+        subject: 'Hello',
+        text: 'Hello world ?',
         html: html
     };
-    
+
     return new Promise((resolve, reject) => {
         transporter.sendMail
-            (mailOptions, (error, info) => error ? reject(error) : resolve(info));
+            (mailOptions, (error, info) => error ? reject(error) : resolve(info))
+
     })
 }
 

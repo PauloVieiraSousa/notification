@@ -33,11 +33,14 @@ function sendSms(item) {
     // return Sms.send(item.user.phone, item.items)
 }
 function timeout() {
-    return new Promise(resolve => setTimeout(() => resolve, 1000))
+    return new Promise(resolve => setTimeout(() => resolve(), 1000))
 }
 function sendEmail(item) {
-    log(`sending email to ${item.user.email}`)
-    return timeout().then(_ => Mailer.send(item.user.email, item.items))
+
+    return timeout().then(_ => {
+        log(`sending email to ${item.user.email}`)
+        Mailer.send(item.user.email, item.items)
+    })
 }
 
 function sendBotMessage(items) {
@@ -83,7 +86,7 @@ function runNotifications(results) {
 
 }
 
-Every(5, 'seconds', function () {
+Every(10, 'seconds', function () {
     notificationDb.findAsync({ processed: false, items: { $ne: null } })
         .then(runNotifications)
         .then(log)
