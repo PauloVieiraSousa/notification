@@ -12,9 +12,7 @@ const transporter = nodemailer.createTransport({
 });
 
 function mailer(email, items) {
-    const html = items.map(i => `<b>URL:</b> ${i.pass.url} <br>
-                                  <b>PRICE</b>: R$ ${i.pass.price} 
-                                  <br><br>`).join()
+    const html = items.map(i => `<b>Ois<b>`).join()
     const mailOptions = {
         from: 'rexflightscanner@gmail.com', 
         to: email, 
