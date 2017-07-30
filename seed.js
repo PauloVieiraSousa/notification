@@ -16,7 +16,7 @@ notificationDb
         user: {
             name: 'Erick Wendel',
             fbUser: 'erickwendel',
-            email: 'igor@devstacks.com.br',
+            email: 'erick.workspace@gmail.com',
             phone: '5511969803385'
 
         },

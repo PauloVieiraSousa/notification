@@ -1,6 +1,7 @@
 const Bluebird = require('bluebird')
 const nodemailer = require('nodemailer')
 const pug = require('pug')
+const moment = require('moment')
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     host: 'smtp.gmail.com',
@@ -28,22 +29,30 @@ function mapFlight(flight) {
 function mailer(email, items) {
     const html = items.map(i => `<b>Ois<b>`).join()
     const html2 = items.map(i => {
-        const price = `R$ ${i.fare.total_price}`
+        const price = `R$ ${i.fare.total_price.toString().replace('.', ',')}`
         const outbound = mapFlight(i.itineraries[0].outbound.flights[0])
         const inbound = mapFlight(i.itineraries[0].inbound.flights[0])
-        const out1 = { destiny: `${outbound.originAirport} - ${outbound.destinationAirport}`,
-                      price: price, boarding: outbound.departsAt }
-        const in1 = { destiny: `${inbound.originAirport} - ${inbound.destinationAirport}`,
-                                    price: price, boarding: inbound.departsAt }
+        const out1 = {
+            destiny: `${outbound.originAirport} - ${outbound.destinationAirport}`,
+            airline: outbound.airline,
+            price: price, 
+            boarding: moment(outbound.departsAt, 'YYYY-MM-DDThh:mm:ssZ').format('DD/MM/YY - hh:mm') + ' hrs'
+        }
+        const in1 = {
+            destiny: `${inbound.originAirport} - ${inbound.destinationAirport}`,
+            airline: inbound.airline,
+            price: price, 
+            boarding: moment(inbound.departsAt, 'YYYY-MM-DDThh:mm:ssZ').format('DD/MM/YY - hh:mm') + ' hrs'
+        }
         return { inbound: in1, outbound: out1 }
 
     })
-    let items = []
+    let mappedItems = []
     for (var i = 0; i < html2.length; i++) {
-      items[i] = html2[i].inbound
-      items[i + 1] = html2[i].outbound
+        mappedItems[i] = html2[i].inbound
+        mappedItems[i + 1] = html2[i].outbound
     }
-    
+
     const fs = require('fs')
     const headerImage = fs.readFileSync('templates/images/header.jpg')
     const sidebarImage = fs.readFileSync('templates/images/ida-volta.jpg')
@@ -52,7 +61,7 @@ function mailer(email, items) {
     const result = pug.renderFile('templates/mail.pug', {
         header: `data:image/png;base64,${headerEncodedImage}`,
         sidebar: `data:image/png;base64,${sidebarEncodedImage}`,
-        tickers: items
+        tickers: mappedItems
         // [
         //   { destiny: 'GRU - SLZ', price: 'R$ 343,00', boarding: '07h45' },
         //   { destiny: 'GRU - SLZ', price: 'R$ 343,00', boarding: '07h45' },
