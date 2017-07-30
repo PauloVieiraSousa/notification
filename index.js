@@ -70,7 +70,6 @@ function sendNotifications(items) {
 function updateNotifications(items) {
     log(`updating notifications`)
     const results = items.map(i => {
-        log(i._id)
         return notificationDb.updateAsync({ _id: i._id }, { $set: { processed: true } })
     })
 
