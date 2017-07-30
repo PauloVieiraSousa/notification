@@ -27,8 +27,8 @@ notificationDb
         },
         processed: false,
         configuration: {
-            maxPrice: 100.2,
-            minPrice: 10.1,
+            maxPrice: 10002,
+            minPrice: 101,
             limitDate: new Date(2019, 8, 1)
         },
         insertedAt: new Date(),
@@ -79,7 +79,7 @@ notificationDb
                     }]
                 }
             }],
-            "fare": {
+            "fare": { 
                 "total_price": "880.46",
                 "price_per_adult": {
                     "total_fare": "880.46",

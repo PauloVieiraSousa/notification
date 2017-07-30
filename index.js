@@ -27,16 +27,17 @@ const NOTIFIERS = {
     email: sendEmail,
     messengerBot: sendBotMessage
 }
- 
+
 function sendSms(item) {
     return Promise.resolve(1)
     // return Sms.send(item.user.phone, item.items)
 }
-
+function timeout() {
+    return new Promise(resolve => setTimeout(() => resolve, 1000))
+}
 function sendEmail(item) {
     log(`sending email to ${item.user.email}`)
-    log('item', item)
-    return Mailer.send(item.user.email, item.items)
+    return timeout().then(_ => Mailer.send(item.user.email, item.items))
 }
 
 function sendBotMessage(items) {
@@ -48,6 +49,7 @@ function sendNotifications(items) {
 
     const results = items
         .map(item => {
+
             const notification = item.notification
             const functions = Object.keys(notification).filter(i => notification[i])
 
@@ -81,9 +83,9 @@ function runNotifications(results) {
 
 }
 
-Every(1, 'second', function () {
-    notificationDb.findAsync({ processed: false })
+// Every(30, 'seconds', function () {
+    notificationDb.findAsync({ processed: false, items: { $ne: null } })
         .then(runNotifications)
         .then(log)
         .catch(err => error(err))
-})
+// })
