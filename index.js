@@ -81,9 +81,9 @@ function runNotifications(results) {
 
 }
 
-// Every(1, 'second', function () {
+Every(1, 'second', function () {
     notificationDb.findAsync({ processed: false })
         .then(runNotifications)
         .then(log)
         .catch(err => error(err))
-// })
+})
