@@ -49,8 +49,8 @@ function mailer(email, items) {
     })
     let mappedItems = []
     for (var i = 0; i < html2.length; i++) {
-        mappedItems[i] = html2[i].inbound
-        mappedItems[i + 1] = html2[i].outbound
+        mappedItems[i] = html2[i].outbound
+        mappedItems[i + 1] = html2[i].inbound
     }
 
     const fs = require('fs')
